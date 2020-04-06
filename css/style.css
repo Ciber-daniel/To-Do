@@ -1,0 +1,174 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    background-image: url(/image/background);
+    background-size: cover;
+    background-repeat:no-repeat ;
+    background-position: center center;
+    background-attachment: fixed;
+}
+
+.container  {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+ }
+
+ .form_container {
+    border: 1px solid rgba(0, 0, 0, 0.247);
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.877);
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 200px;
+    border-radius: 50px;
+ }
+
+.position{
+    display: flex;
+    flex-direction: column;
+}
+
+ .position h4 {
+    font-family: 'Satisfy', cursive;
+    font-size: 40px;
+ }
+
+.position input  {
+    margin-top: 30px;
+    border-radius: 15px;
+}
+
+.position input:focus  {
+  border-color: #60a3bc;
+
+}
+
+.position label {
+    margin-top: 10px;
+}
+
+ .ico_style, .position {
+     margin: 40px;
+ }
+
+ .example_b {
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #60a3bc;
+  padding: 20px;
+  border-radius: 50px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+  }
+
+  .example_b:hover {
+    text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+    transition: all 0.4s ease 0s;
+    text-decoration: none;
+    }
+
+    /* Second Section */
+
+    .content {  
+        min-height:100vh;
+        border: 1px solid rgba(0, 0, 0, 0.247);
+        background-color: rgba(255, 255, 255, 0.877);
+        margin: 0% 20% 0% 20%; 
+    }
+
+    .image_container{
+        display: flex;
+        text-align: center;
+        padding-bottom: 30px;
+        justify-content: center;
+        background-image: url(/image/background_two);
+    }
+
+    .image_container img {
+        margin-top: 20px;
+        width: 212px;
+        height: 212px;
+       
+    }
+
+    .input_and_btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .add_btn {
+        text-decoration: none;
+        padding: 10px;
+        color: #fff !important;
+        text-transform: uppercase;
+        background: #60a3bc;
+        border-radius: 50px;
+        border: none;
+        transition: all 0.4s ease 0s;
+        }
+
+    .add_btn:hover {
+        text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+        transition: all 0.4s ease 0s;
+        text-decoration: none;
+    }
+
+    .container_input {
+        margin: 10px;
+    }
+
+    .container_input input{
+        width: 500px;
+        height: 40px;
+    }
+
+    .title_container {
+        display: flex;
+        font-family: 'Satisfy', cursive;
+        justify-content: center;
+    }
+
+    .to_do {
+        margin: 5% 2% 0% 2%;
+    }
+
+    .tarea{
+        padding: 30px;
+        display: flex;
+        background-color: rgba(88, 60, 54, 0.445);
+        border: 1px solid #591F12;
+        border-radius: 3px;
+        margin: 0px 5px 5px 5px;
+    }
+
+    .tarea h2 {
+        font-family: sans-serif;   
+        color: rgba(0, 0, 0, 0.527);
+    }
+
+    .position_container{
+        display: flex;
+        align-items: center;
+    }
+
+    .tarea button {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        border: 1px solid black;
+        font-size: 15px;
+        margin: 10px;
+    }
+
+    .to_do_options{
+        display: flex;
+        flex-direction: column;
+    }
+    
+
+    
