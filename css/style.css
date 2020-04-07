@@ -8,7 +8,7 @@ body {
     background-attachment: fixed;
 }
 
-.container  {
+#container  {
     text-align: center;
     align-items: center;
     display: flex;
@@ -23,6 +23,13 @@ body {
     flex-direction: row;
     margin-top: 200px;
     border-radius: 50px;
+ }
+
+ .example_b {
+     display: flex;
+     align-items: center;
+     text-align: center;
+     justify-content: center;
  }
 
 .position{
@@ -165,10 +172,20 @@ body {
         margin: 10px;
     }
 
+    .tarea button:hover {
+        background-color: rgb(177, 177, 177);
+        color: white;
+        border: 1px solid white;
+    }
+
     .to_do_options{
         display: flex;
         flex-direction: column;
     }
     
+
+    #show {
+        display: none;
+    }
 
     
