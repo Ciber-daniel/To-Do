@@ -25,13 +25,7 @@ body {
     border-radius: 50px;
  }
 
- .example_b {
-     display: flex;
-     align-items: center;
-     text-align: center;
-     justify-content: center;
- }
-
+ 
 .position{
     display: flex;
     flex-direction: column;
@@ -60,23 +54,31 @@ body {
      margin: 40px;
  }
 
- .example_b {
-  color: #fff !important;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #60a3bc;
-  padding: 20px;
-  border-radius: 50px;
-  display: inline-block;
-  border: none;
-  transition: all 0.4s ease 0s;
-  }
+ .button_cont {
+     display: flex;
+     justify-content: center;
+     text-align: center;
+     margin-top: 100px;
+ }
 
-  .example_b:hover {
+ .example_b {
+    color: #fff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: #60a3bc;
+    padding: 20px;
+    border-radius: 50px;
+    display: inline-block;
+    border: none;
+    transition: all 0.4s ease 0s;
+}
+
+
+.example_b:hover {
     text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
     transition: all 0.4s ease 0s;
     text-decoration: none;
-    }
+}
 
     /* Second Section */
 
