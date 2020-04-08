@@ -6,6 +6,7 @@ const dataInput = document.getElementById('tarea')
 const addData = document.getElementById('btn')
 const hideForm = document.getElementsByClassName('container')[0]
 const showTareas = document.getElementsByClassName('to_do_options')[0]
+
 let tareas = ['Tomar mucha agua','Hacer ejercicio','Perder en lolsito']
 
 if(localStorage.getItem('user')) {
@@ -66,15 +67,21 @@ registerBtn.addEventListener('click', function() {
      }
  }
 
- mostrar()
+ document.getElementById('new-tarea-form').addEventListener('submit', function(e) {
+     e.preventDefault();
+     
+    anadirTareaDesdeInput();
+ })
 
 
 
- addData.addEventListener('click', function() {
-     if(dataInput.value === "") {
-         return
-     }
-     tareas.push(dataInput.value)
-     dataInput.value = ''
-     mostrar()
-  })
+ addData.addEventListener('click', anadirTareaDesdeInput)
+
+  function anadirTareaDesdeInput() {
+    if(dataInput.value === "") {
+        return
+    }
+    tareas.push(dataInput.value)
+    dataInput.value = ''
+    mostrar()
+  }
