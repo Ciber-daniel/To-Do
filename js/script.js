@@ -10,7 +10,7 @@ const showTareas = document.getElementsByClassName('to_do_options')[0]
 let tareas = ['Tomar mucha agua','Hacer ejercicio','Perder en lolsito']
 
 if(localStorage.getItem('user')) {
-    tareas = JSON.parse(localStorage.getItem('tareas'))
+    tareas = JSON.parse(localStorage.getItem(`tareas`)) || []
     hideForm.style.display = `none`
     showSecondPage.style.display = `block`
     mostrar()
