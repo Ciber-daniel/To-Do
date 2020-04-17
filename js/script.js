@@ -7,7 +7,7 @@ const addData = document.getElementById('btn')
 const hideForm = document.getElementsByClassName('container')[0]
 const showTareas = document.getElementsByClassName('to_do_options')[0]
 
-let tareas = ['Tomar mucha agua','Hacer ejercicio','Perder en lolsito']
+let tareas =[]
 
 if(localStorage.getItem('user')) {
     tareas = JSON.parse(localStorage.getItem(`tareas`)) || []
@@ -15,7 +15,6 @@ if(localStorage.getItem('user')) {
     showSecondPage.style.display = `block`
     mostrar()
 }
-
 
 registerBtn.addEventListener('click', function() {
     let objeto = {
@@ -31,6 +30,7 @@ registerBtn.addEventListener('click', function() {
     localStorage.setItem('user',JSON.stringify(objeto))
     hideForm.style.display = 'none'
     showSecondPage.style.display = 'block'
+    mostrar()
 })
 
 
@@ -74,14 +74,25 @@ registerBtn.addEventListener('click', function() {
  })
 
 
-
  addData.addEventListener('click', anadirTareaDesdeInput)
 
   function anadirTareaDesdeInput() {
     if(dataInput.value === "") {
         return
     }
-    tareas.push(dataInput.value)
+    tareas.unshift(dataInput.value)
     dataInput.value = ''
     mostrar()
+    console.log('este')
   }
+
+
+  async function getData() {
+    const response = await fetch('http://localhost:3000/users')
+    const data = await response.json()
+    tareas = data
+    console.log(tareas)
+}
+
+getData()
+
