@@ -5,10 +5,10 @@ const app = express()
 
 app.use(cors())
 
-const user = ['Sacar la basura','barrer','estudiar','dormir']
+const tareas = ['Sacar la basura','barrer','estudiar','dormir']
 
-app.get('/users', (req,res) => {
-    res.send(user)
+app.get('/tareas', (req,res) => {
+    res.send(tareas)
 })
 
 

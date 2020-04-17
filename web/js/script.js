@@ -17,7 +17,7 @@ if(localStorage.getItem('user')) {
 }
 
 registerBtn.addEventListener('click', function() {
-    let objeto = {
+    const userData = {
         nombre:'',
         email:''
     }    
@@ -25,9 +25,9 @@ registerBtn.addEventListener('click', function() {
         return
     }
 
-    objeto.nombre = nameData.value
-    objeto.email = emailData.value
-    localStorage.setItem('user',JSON.stringify(objeto))
+    userData.nombre = nameData.value
+    userData.email = emailData.value
+    localStorage.setItem('user',JSON.stringify(userData))
     hideForm.style.display = 'none'
     showSecondPage.style.display = 'block'
     mostrar()
@@ -88,7 +88,7 @@ registerBtn.addEventListener('click', function() {
 
 
   async function getData() {
-    const response = await fetch('http://localhost:3000/users')
+    const response = await fetch('http://localhost:3000/tareas')
     const data = await response.json()
     tareas = data
     console.log(tareas)
