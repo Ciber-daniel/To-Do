@@ -12,6 +12,7 @@ app.get('/users', (req,res) => {
 })
 
 
+
 app.listen(3000, () => {
     console.log('Started to listen in the port',3000)
 })
