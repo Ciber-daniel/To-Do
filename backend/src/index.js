@@ -9,8 +9,8 @@ app.use(bodyParser());
 let tareas = []
 
 app.post('/tareas',(req,res) => {
-    tareas.push(req.body)
-    res.send(req.body)
+    tareas.push(req.body.tarea)
+    res.send(tareas)
 })
         
 app.get('/tareas',(req, res) => {

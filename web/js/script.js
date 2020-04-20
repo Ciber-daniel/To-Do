@@ -6,6 +6,7 @@ const dataInput = document.getElementById('tarea')
 const addData = document.getElementById('btn')
 const hideForm = document.getElementsByClassName('container')[0]
 const showTareas = document.getElementsByClassName('toDoOptions')[0]
+getData()
 
 let tareas = []
 
@@ -70,13 +71,13 @@ document.getElementById('newTareaForm').addEventListener('submit', function (e) 
 
 addData.addEventListener('click', anadirTareaDesdeInput())
 
-function anadirTareaDesdeInput() {
+async function anadirTareaDesdeInput() {
     if (dataInput.value === "") {
         return
     }
+    await sendData()
+    await getData()
     mostrar()
-    sendData()
-    getData()
     dataInput.value = ''
 }
 
@@ -88,11 +89,11 @@ async function sendData() {
         },
         body: JSON.stringify({tarea: dataInput.value})
     })
-    const body = await response.json()
+    tareas = await response.json()
 }
 
 async function getData() {
     const response = await fetch('http://localhost:5000/tareas')
-    const body = await response.json()
-    console.log(body)
+    tareas = await response.json()
+    mostrar()
 }
