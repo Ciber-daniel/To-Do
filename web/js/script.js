@@ -39,8 +39,8 @@ registerBtn.addEventListener('click', function () {
 async function eliminarTarea(index) {
     let deleteTarea = tareas
     deleteTarea.splice(index, 1)
+    mostrar()
     await deleteData()
-    mostrar();
 }
 
 function mostrar() {

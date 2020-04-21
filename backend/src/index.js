@@ -7,7 +7,7 @@ const app = express()
 app.use(cors())
 app.use(bodyParser());
 
-let tareas = ['dormir']
+let tareas = []
 
 app.post('/tareas',(req,res) => {
     tareas.push(req.body.tarea)
@@ -19,9 +19,8 @@ app.get('/tareas',(req, res) => {
 })
 
 app.delete('/tareas',(req,res) => {
-    tareas.splice(req.params)
+    tareas.splice(req.params, 1)
     res.send(tareas)
-    console.log('hola')
 })
 
 app.listen(5000, () => {
