@@ -36,10 +36,10 @@ registerBtn.addEventListener('click', function () {
 
 
 
-function eliminarTarea(index) {
+async function eliminarTarea(index) {
     let deleteTarea = tareas
     deleteTarea.splice(index, 1)
-    tareas.splice(index, 1)
+    await deleteData()
     mostrar();
 }
 
@@ -52,6 +52,7 @@ function mostrar() {
                   </div>
               </div>`
     }).join('')
+
     const deleteBtn = document.getElementsByClassName('delete_btn')
     for (let i = 0; i < deleteBtn.length; i++) {
         const element = deleteBtn[i];
@@ -97,3 +98,15 @@ async function getData() {
     tareas = await response.json()
     mostrar()
 }
+
+async function deleteData() {
+    const response = await fetch('http://localhost:5000/tareas', {
+        method:'DELETE',
+        headers: {
+            'COntent-Type' : 'application/json'
+        },
+    })
+    const deleteTarea = response.json()
+}
+
+
