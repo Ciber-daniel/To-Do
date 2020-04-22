@@ -7,20 +7,37 @@ const app = express()
 app.use(cors())
 app.use(bodyParser());
 
-let tareas = []
+// let tareas = []
+
+let user = {
+    nombre:'',
+    email:'',
+    tareas:[]
+}
+
+app.post('/user', (req,res) => {
+    user.nombre= req.body.nombre
+    user.email= req.body.email
+    res.send(user)
+
+})
+
+app.get('/user', (req,res) => {
+    res.send(user)
+})
 
 app.post('/tareas',(req,res) => {
-    tareas.push(req.body.tarea)
-    res.send(tareas)
+    user.tareas.unshift(req.body.tarea)
+    res.send(user.tareas)
 })
 
 app.get('/tareas',(req, res) => {
-    res.send(tareas)
+    res.send(user.tareas)
 })
 
 app.delete('/tareas',(req,res) => {
-    tareas.splice(req.params, 1)
-    res.send(tareas)
+    user.tareas.splice(req.params, 1)
+    res.send(user)
 })
 
 app.listen(5000, () => {

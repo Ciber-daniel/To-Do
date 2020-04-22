@@ -6,18 +6,21 @@ const dataInput = document.getElementById('tarea')
 const addData = document.getElementById('btn')
 const hideForm = document.getElementsByClassName('container')[0]
 const showTareas = document.getElementsByClassName('toDoOptions')[0]
-getData()
 
+
+getData()
 let tareas = []
 
-if (localStorage.getItem('user')) {
-    tareas = JSON.parse(localStorage.getItem(`tareas`)) || []
-    hideForm.style.display = `none`
-    showSecondPage.style.display = `block`
-    mostrar()
-}
+ if (localStorage.getItem('user')) {
 
-registerBtn.addEventListener('click', function () {
+     tareas = JSON.parse(localStorage.getItem(`tareas`)) || []
+     hideForm.style.display = `none`
+     showSecondPage.style.display = `block`
+     mostrar()
+ }
+
+registerBtn.addEventListener('click', async function () {
+
     const userData = {
         nombre: '',
         email: ''
@@ -31,6 +34,7 @@ registerBtn.addEventListener('click', function () {
     localStorage.setItem('user', JSON.stringify(userData))
     hideForm.style.display = 'none'
     showSecondPage.style.display = 'block'
+    sendUserData()
     mostrar()
 })
 
@@ -104,9 +108,20 @@ async function deleteData() {
         method:'DELETE',
         headers: {
             'COntent-Type' : 'application/json'
-        },
+        }
     })
-    const deleteTarea = response.json()
 }
 
-
+async function sendUserData() {
+    const response = await fetch('http://localhost:5000/user', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(
+            {nombre:nameData.value,
+             email:emailData.value,
+             tarea:dataInput.value
+            })   
+    })
+}
