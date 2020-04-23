@@ -7,9 +7,9 @@ const addData = document.getElementById('btn')
 const hideForm = document.getElementsByClassName('container')[0]
 const showTareas = document.getElementsByClassName('toDoOptions')[0]
 
-
 getData()
 let tareas = []
+mostrar()
 
  if (localStorage.getItem('user')) {
 
@@ -21,20 +21,21 @@ let tareas = []
 
 registerBtn.addEventListener('click', async function () {
 
-    const userData = {
-        nombre: '',
-        email: ''
-    }
+     const userData = {
+         nombre: '',
+         email: ''
+     }
     if (!nameData.value || !emailData.value) {
         return
     }
 
-    userData.nombre = nameData.value
-    userData.email = emailData.value
-    localStorage.setItem('user', JSON.stringify(userData))
+     userData.nombre = nameData.value
+     userData.email = emailData.value
+     localStorage.setItem('user', JSON.stringify(userData))
     hideForm.style.display = 'none'
     showSecondPage.style.display = 'block'
     sendUserData()
+    getData()
     mostrar()
 })
 
@@ -44,7 +45,7 @@ async function eliminarTarea(index) {
     let deleteTarea = tareas
     deleteTarea.splice(index, 1)
     mostrar()
-    await deleteData()
+    // await deleteData()
 }
 
 function mostrar() {
@@ -80,37 +81,12 @@ async function anadirTareaDesdeInput() {
     if (dataInput.value === "") {
         return
     }
-    await sendData()
+    await sendUserData()
     await getData()
     mostrar()
     dataInput.value = ''
 }
 
-async function sendData() {
-    const response = await fetch('http://localhost:5000/tareas', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({tarea: dataInput.value})
-    })
-    tareas = await response.json()
-}
-
-async function getData() {
-    const response = await fetch('http://localhost:5000/tareas')
-    tareas = await response.json()
-    mostrar()
-}
-
-async function deleteData() {
-    const response = await fetch('http://localhost:5000/tareas', {
-        method:'DELETE',
-        headers: {
-            'COntent-Type' : 'application/json'
-        }
-    })
-}
 
 async function sendUserData() {
     const response = await fetch('http://localhost:5000/user', {
@@ -119,9 +95,22 @@ async function sendUserData() {
             'Content-type': 'application/json'
         },
         body: JSON.stringify(
-            {nombre:nameData.value,
-             email:emailData.value,
-             tarea:dataInput.value
-            })   
+            {nombre:nameData.value,email:emailData.value,tarea:dataInput.value})   
     })
 }
+
+ async function getData() {
+     const response = await fetch('http://localhost:5000/tareas')
+     tareas = await response.json()
+     mostrar()
+ }
+
+
+// async function deleteData() {
+//     const response = await fetch('http://localhost:5000/tareas', {
+//         method:'DELETE',
+//         headers: {
+//             'COntent-Type' : 'application/json'
+//         }
+//     })
+// }
