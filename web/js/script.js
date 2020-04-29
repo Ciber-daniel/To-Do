@@ -7,15 +7,16 @@ const hideForm = document.getElementsByClassName('container')[0]
 const showTareas = document.getElementsByClassName('toDoOptions')[0]
 const userForm = document.getElementById('user-form');
 
+
 let users = []
 let tareas = []
 
-if (localStorage.getItem('user')) {
+mostrar()
 
-    tareas = JSON.parse(localStorage.getItem(`tareas`)) || []
-    hideForm.style.display = `none`
-    showSecondPage.style.display = `block`
-    mostrar()
+
+if(localStorage.getItem('user')) {
+    hideForm.style.display = 'none'
+    showSecondPage.style.display = 'block' 
 }
 
 userForm.addEventListener('submit', async (e) => {
@@ -34,16 +35,13 @@ userForm.addEventListener('submit', async (e) => {
     await sendUserData(userData);
     await receiveUser()
 
-    hideForm.style.display = 'none'
-    showSecondPage.style.display = 'block'
+    localStorage.setItem('user',JSON.stringify(userData))
+
     mostrar()
+    hideForm.style.display = 'none'
+    showSecondPage.style.display = 'block' 
 })
 
-const signoutButtonElement = document.getElementById('signout-button');
-    signoutButtonElement.addEventListener('click', () => {
-    localStorage.clear();
-    window.location = '/web'
-})
 
 
 function eliminarTarea(index) {
@@ -77,7 +75,13 @@ document.getElementById('newTareaForm').addEventListener('submit', function (e) 
     anadirTareaDesdeInput();
 })
 
-
+function showPages() {
+    if(users.length === 1) {
+        hideForm.style.display = 'none'
+        showSecondPage.style.display = 'block' 
+    }
+    console.log('execute')
+}
 
 async function anadirTareaDesdeInput() {
     if (dataInput.value === "") {
@@ -122,3 +126,4 @@ async function receiveTareas() {
     response = await fetch(`http://localhost:5000/users/${user.id}/tareas`)
     tareas = await response.json()
 }
+

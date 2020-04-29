@@ -29,9 +29,9 @@ app.post('/users/:id/tareas', (req,res) => {
     res.send(users)
 })
 
-app.get('users/:id/tareas', (req,res) => {
-    const user = users.find(u => u.id === u.id);
-    res.send(users)
+app.get('/users/:id/tareas', (req,res) => {
+    const user = users.find(u => u.email === u.email);
+    res.send(user.tareas)
 })
 
 app.listen(5000, () => {
