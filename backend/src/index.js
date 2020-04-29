@@ -10,28 +10,37 @@ app.use(bodyParser());
 const users = []
 
 app.post('/users', (req,res) => {
-    users.push({
+    const user = {
         ...req.body,
         id: users.length  + 1,
         tareas: [],
-    })
-    res.send(req.body)
+    }
+    users.push(user)
+    res.send(user)
 })
 
 app.get('/users', (req,res) => {
-    const user = users.find(u => u.email === u.email)
     res.send(users)
+})
+
+app.get('/users/:id', (req,res) => {
+    const user = users.find(u => u.id === parseInt(req.params.id))
+    res.send(user)
 })
 
 app.post('/users/:id/tareas', (req,res) => {
     const user = users.find(u => u.id === parseInt(req.params.id));
     user.tareas.push(req.body.tarea); // Si enviaste tarea en el body
-    res.send(users)
+    res.send(user.tareas)
 })
 
 app.get('/users/:id/tareas', (req,res) => {
-    const user = users.find(u => u.email === u.email);
-    res.send(user.tareas)
+    const user = users.find(u => u.id === parseInt(req.params.id));
+    if (user) {
+        res.send(user.tareas)
+        return;
+    }
+    res.send([]);
 })
 
 app.listen(5000, () => {

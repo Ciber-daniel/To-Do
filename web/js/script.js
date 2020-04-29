@@ -8,16 +8,8 @@ const showTareas = document.getElementsByClassName('toDoOptions')[0]
 const userForm = document.getElementById('user-form');
 
 
-let users = []
+let user = {}
 let tareas = []
-
-mostrar()
-
-
-if(localStorage.getItem('user')) {
-    hideForm.style.display = 'none'
-    showSecondPage.style.display = 'block' 
-}
 
 userForm.addEventListener('submit', async (e) => {
     e.preventDefault()
@@ -29,13 +21,11 @@ userForm.addEventListener('submit', async (e) => {
     const userData = {
         nombre: nameData.value,
         email: emailData.value,
-        tareas: dataInput.value
+        tareas: []
     }
 
-    await sendUserData(userData);
-    await receiveUser()
-
-    localStorage.setItem('user',JSON.stringify(userData))
+    user = await sendUserData(userData);
+    localStorage.setItem('user', JSON.stringify(user));
 
     mostrar()
     hideForm.style.display = 'none'
@@ -76,7 +66,7 @@ document.getElementById('newTareaForm').addEventListener('submit', function (e) 
 })
 
 function showPages() {
-    if(users.length === 1) {
+    if(user) {
         hideForm.style.display = 'none'
         showSecondPage.style.display = 'block' 
     }
@@ -103,15 +93,10 @@ async function sendUserData(userToSend) {
         },
         body: JSON.stringify(userToSend)
     });
-}
-
-async function receiveUser() {
-    const response = await fetch(`http://localhost:5000/users`)
-     users = await response.json()
+    return response.json()
 }
 
 async function sendTareas() {
-    const user = users.find(u => u.id === u.id)
     const response = await fetch(`http://localhost:5000/users/${user.id}/tareas`, {
         method: 'POST',
         headers: {
@@ -119,11 +104,23 @@ async function sendTareas() {
         },
         body: JSON.stringify({tarea:dataInput.value})
     })
+    tareas = await response.json()
 }
 
 async function receiveTareas() {
-    const user = users.find(u => u.id === u.id)
     response = await fetch(`http://localhost:5000/users/${user.id}/tareas`)
     tareas = await response.json()
 }
 
+async function setup() {
+    const userStr = localStorage.getItem('user');
+    if(userStr) {
+        hideForm.style.display = 'none'
+        showSecondPage.style.display = 'block' 
+        user = JSON.parse(userStr);
+        await receiveTareas();
+        mostrar();
+    }
+}
+
+setup();
