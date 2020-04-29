@@ -31,8 +31,8 @@ userForm.addEventListener('submit', async (e) => {
         tareas: dataInput.value
     }
 
-    await receiveUser()
     await sendUserData(userData);
+    await receiveUser()
 
     hideForm.style.display = 'none'
     showSecondPage.style.display = 'block'
@@ -85,11 +85,11 @@ async function anadirTareaDesdeInput() {
     }
 
     await sendTareas()
+    await receiveTareas()
 
     mostrar()
     dataInput.value = ''
 }
-
 
 async function sendUserData(userToSend) {
     const response = await fetch('http://localhost:5000/users', {
@@ -103,17 +103,22 @@ async function sendUserData(userToSend) {
 
 async function receiveUser() {
     const response = await fetch(`http://localhost:5000/users`)
-    users = await response.JSON
-    console.log('Funcionando')
-    console.log(users)
+     users = await response.json()
 }
 
 async function sendTareas() {
-    const response = await fetch(`http://localhost:5000/users/${id}/tareas`, {
+    const user = users.find(u => u.id === u.id)
+    const response = await fetch(`http://localhost:5000/users/${user.id}/tareas`, {
         method: 'POST',
         headers: {
             'Content-type' : 'application/json'
         },
-        body:JSON.stringify(dataInput.value)
+        body: JSON.stringify({tarea:dataInput.value})
     })
+}
+
+async function receiveTareas() {
+    const user = users.find(u => u.id === u.id)
+    response = await fetch(`http://localhost:5000/users/${user.id}/tareas`)
+    tareas = await response.json()
 }

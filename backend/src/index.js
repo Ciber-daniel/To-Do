@@ -16,18 +16,21 @@ app.post('/users', (req,res) => {
         tareas: [],
     })
     res.send(req.body)
-  
 })
 
 app.get('/users', (req,res) => {
     const user = users.find(u => u.email === u.email)
-    res.send(user)
+    res.send(users)
 })
 
 app.post('/users/:id/tareas', (req,res) => {
     const user = users.find(u => u.id === parseInt(req.params.id));
-    console.log(user.tareas);
     user.tareas.push(req.body.tarea); // Si enviaste tarea en el body
+    res.send(users)
+})
+
+app.get('users/:id/tareas', (req,res) => {
+    const user = users.find(u => u.id === u.id);
     res.send(users)
 })
 
