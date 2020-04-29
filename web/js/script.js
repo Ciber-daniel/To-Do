@@ -7,6 +7,7 @@ const hideForm = document.getElementsByClassName('container')[0]
 const showTareas = document.getElementsByClassName('toDoOptions')[0]
 const userForm = document.getElementById('user-form');
 
+let users = []
 let tareas = []
 
 if (localStorage.getItem('user')) {
@@ -30,6 +31,7 @@ userForm.addEventListener('submit', async (e) => {
         tareas: dataInput.value
     }
 
+    await receiveUser()
     await sendUserData(userData);
 
     hideForm.style.display = 'none'
@@ -99,8 +101,15 @@ async function sendUserData(userToSend) {
     });
 }
 
+async function receiveUser() {
+    const response = await fetch(`http://localhost:5000/users`)
+    users = await response.JSON
+    console.log('Funcionando')
+    console.log(users)
+}
+
 async function sendTareas() {
-    const response = await fetch(`http://localhost:5000/users/1/tareas`, {
+    const response = await fetch(`http://localhost:5000/users/${id}/tareas`, {
         method: 'POST',
         headers: {
             'Content-type' : 'application/json'

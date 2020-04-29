@@ -33,38 +33,4 @@ app.post('/users/:id/tareas', (req,res) => {
 
 app.listen(5000, () => {
     console.log('Started to listen in the port', 5000)
-})
-
-
-// app.get('/users/tareas', (req,res) => {
-//     const user = users.find(u => u.id === parseInt(req.params.id));
-//     res.send(user);
-// })
-
-// app.post('/users', (req, res) => {
-//     const { nombre, email } = req.body;
-
-//     const user = {
-//         id: users.length + 1,
-//         nombre,
-//         email,
-//         tareas: [],
-//     }
-//     const existingUser = users.find(u => u.email === user.email);
-
-//     if (existingUser) {
-//         res.send(existingUser);
-//         return;
-//     }
-//     users.push(user);
-//     res.send(user)
-// })
-
-// app.get('/tareas', (req, res) => {
-//     const tarea = users.find(u => u.id === users.id)
-//     res.send(tarea)
-// })
-
-// app.delete('/tareas',(req,res) => {
-//     user.splice(req.params, 1)
-//  })
+}) 
