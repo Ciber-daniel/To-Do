@@ -1,51 +1,53 @@
 const nameData = document.getElementById('name')
 const emailData = document.getElementById('email')
-const registerBtn = document.getElementById('register')
 const showSecondPage = document.getElementById('show')
 const dataInput = document.getElementById('tarea')
 const addData = document.getElementById('btn')
 const hideForm = document.getElementsByClassName('container')[0]
 const showTareas = document.getElementsByClassName('toDoOptions')[0]
+const userForm = document.getElementById('user-form');
 
-getData()
 let tareas = []
-mostrar()
 
- if (localStorage.getItem('user')) {
+if (localStorage.getItem('user')) {
 
-     tareas = JSON.parse(localStorage.getItem(`tareas`)) || []
-     hideForm.style.display = `none`
-     showSecondPage.style.display = `block`
-     mostrar()
- }
+    tareas = JSON.parse(localStorage.getItem(`tareas`)) || []
+    hideForm.style.display = `none`
+    showSecondPage.style.display = `block`
+    mostrar()
+}
 
-registerBtn.addEventListener('click', async function () {
+userForm.addEventListener('submit', async (e) => {
+    e.preventDefault()
 
-     const userData = {
-         nombre: '',
-         email: ''
-     }
     if (!nameData.value || !emailData.value) {
         return
     }
 
-     userData.nombre = nameData.value
-     userData.email = emailData.value
-     localStorage.setItem('user', JSON.stringify(userData))
+    const userData = {
+        nombre: nameData.value,
+        email: emailData.value,
+        tareas: dataInput.value
+    }
+
+    await sendUserData(userData);
+
     hideForm.style.display = 'none'
     showSecondPage.style.display = 'block'
-    sendUserData()
-    getData()
     mostrar()
 })
 
+const signoutButtonElement = document.getElementById('signout-button');
+    signoutButtonElement.addEventListener('click', () => {
+    localStorage.clear();
+    window.location = '/web'
+})
 
 
-async function eliminarTarea(index) {
+function eliminarTarea(index) {
     let deleteTarea = tareas
     deleteTarea.splice(index, 1)
     mostrar()
-    // await deleteData()
 }
 
 function mostrar() {
@@ -70,47 +72,39 @@ function mostrar() {
 
 document.getElementById('newTareaForm').addEventListener('submit', function (e) {
     e.preventDefault();
-
     anadirTareaDesdeInput();
 })
 
 
-addData.addEventListener('click', anadirTareaDesdeInput())
 
 async function anadirTareaDesdeInput() {
     if (dataInput.value === "") {
         return
     }
-    await sendUserData()
-    await getData()
+
+    await sendTareas()
+
     mostrar()
     dataInput.value = ''
 }
 
 
-async function sendUserData() {
-    const response = await fetch('http://localhost:5000/user', {
+async function sendUserData(userToSend) {
+    const response = await fetch('http://localhost:5000/users', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json'
         },
-        body: JSON.stringify(
-            {nombre:nameData.value,email:emailData.value,tarea:dataInput.value})   
-    })
+        body: JSON.stringify(userToSend)
+    });
 }
 
- async function getData() {
-     const response = await fetch('http://localhost:5000/tareas')
-     tareas = await response.json()
-     mostrar()
- }
-
-
-// async function deleteData() {
-//     const response = await fetch('http://localhost:5000/tareas', {
-//         method:'DELETE',
-//         headers: {
-//             'COntent-Type' : 'application/json'
-//         }
-//     })
-// }
+async function sendTareas() {
+    const response = await fetch(`http://localhost:5000/users/1/tareas`, {
+        method: 'POST',
+        headers: {
+            'Content-type' : 'application/json'
+        },
+        body:JSON.stringify(dataInput.value)
+    })
+}
