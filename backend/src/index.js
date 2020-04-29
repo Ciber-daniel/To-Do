@@ -21,7 +21,7 @@ app.post('/users', (req,res) => {
 
 app.get('/users', (req,res) => {
     const user = users.find(u => u.email === u.email)
-    res.send(user.tareas)
+    res.send(user)
 })
 
 app.post('/users/:id/tareas', (req,res) => {
@@ -30,8 +30,6 @@ app.post('/users/:id/tareas', (req,res) => {
     user.tareas.push(req.body.tarea); // Si enviaste tarea en el body
     res.send(users)
 })
-
-
 
 app.listen(5000, () => {
     console.log('Started to listen in the port', 5000)
