@@ -6,7 +6,7 @@ const addData = document.getElementById('btn')
 const hideForm = document.getElementsByClassName('container')[0]
 const showTareas = document.getElementsByClassName('toDoOptions')[0]
 const userForm = document.getElementById('user-form');
-const exitBtn = document.getElementById('icon_back')
+const exitBtn = document.getElementById('icon_selected')
 
 let user = {}
 let tareas = []

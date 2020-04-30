@@ -12,6 +12,7 @@ body {
     align-items: center;
     display: flex;
     flex-direction: column;
+    animation: fadeIn 0.5s;
 }
 
 .form_container {
@@ -85,6 +86,16 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.247);
     background-color: rgba(255, 255, 255, 0.877);
     margin: 0% 20% 0% 20%;
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .image_container {
@@ -185,23 +196,23 @@ body {
     display: none;
 }
 
-#icon_back {
+.icon_back {
     display: flex;
     justify-content: flex-end;
 }
 
-#icon_back img {
+.icon_back img {
     width: 50px;
     height: 50px;
     margin: 20px;
     background-color: rgba(88, 0, 0, 0.534);
 }
 
-#icon_back img:hover {
+.icon_back img:hover {
     background-color: rgba(88, 0, 0, 0.349);
 }
 
-#icon_back img:active {
+.icon_back img:active {
     border: 1px solid rgba(0, 0, 0, 0.493);
 }
 
