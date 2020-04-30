@@ -15,7 +15,7 @@ app.post('/users', (req,res) => {
         id: users.length  + 1,
         tareas: [],
     }
-    users.push(user)
+    users.unshift(user)
     res.send(user)
 })
 
@@ -30,7 +30,7 @@ app.get('/users/:id', (req,res) => {
 
 app.post('/users/:id/tareas', (req,res) => {
     const user = users.find(u => u.id === parseInt(req.params.id));
-    user.tareas.push(req.body.tarea); // Si enviaste tarea en el body
+    user.tareas.unshift(req.body.tarea); // Si enviaste tarea en el body
     res.send(user.tareas)
 })
 
